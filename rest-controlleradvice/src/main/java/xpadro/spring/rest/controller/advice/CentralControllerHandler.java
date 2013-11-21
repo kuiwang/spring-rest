@@ -14,18 +14,18 @@ import xpadro.spring.rest.validator.PersonValidator;
 @ControllerAdvice
 public class CentralControllerHandler {
 
-	@InitBinder
+    @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(new PersonValidator());
     }
-	
-	@ExceptionHandler({PersonNotFoundException.class})
-	public ResponseEntity<String> handlePersonNotFound(PersonNotFoundException pe) {
-		return new ResponseEntity<String>(pe.getMessage(), HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler({MethodArgumentNotValidException.class})
-	public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException pe) {
-		return new ResponseEntity<String>(pe.getMessage(), HttpStatus.BAD_REQUEST);
-	}
+
+    @ExceptionHandler({ PersonNotFoundException.class })
+    public ResponseEntity<String> handlePersonNotFound(PersonNotFoundException pe) {
+        return new ResponseEntity<String>(pe.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException pe) {
+        return new ResponseEntity<String>(pe.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

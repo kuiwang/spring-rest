@@ -12,21 +12,23 @@ import xpadro.spring.rest.repository.PersonRepository;
 
 /**
  * Returns an existing person
- * @author xpadro
- *
+ * 
  */
 @Controller
 public class GetPersonController {
-	@Autowired
-	private PersonRepository personRepository;
-	
-	/**
-	 * READ operation. Returns an existing person
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value="/persons/{personId}", method=RequestMethod.GET)
-	public @ResponseBody Person getPerson(@PathVariable("personId") long id) {
-		return personRepository.getPerson(id);
-	}
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    /**
+     * READ operation. Returns an existing person
+     * 
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/persons/{personId}", method = RequestMethod.GET)
+    public @ResponseBody
+    Person getPerson(@PathVariable("personId") long id) {
+        return personRepository.getPerson(id);
+    }
 }

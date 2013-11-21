@@ -18,27 +18,30 @@ import xpadro.spring.rest.repository.PersonRepository;
 
 /**
  * Adds a new person
- * @author xpadro
- *
+ * 
  */
 @Controller
 public class AddPersonController {
-private static Logger logger = Logger.getLogger("main");
-	
-	@Autowired
-	private PersonRepository personRepository;
-	
-	/**
-	 * CREATE operation. Adds a new person
-	 * @param person
-	 * @param request
-	 * @param response
-	 */
-	@RequestMapping(value="/persons", method=RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void addPerson(@Valid @RequestBody Person person, HttpServletRequest request, HttpServletResponse response) {
-		personRepository.addPerson(person);
-		logger.info("Person added: "+person.getId());
-		response.setHeader("Location", request.getRequestURL().append("/").append(person.getId()).toString());
-	}
+
+    private static Logger logger = Logger.getLogger("main");
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    /**
+     * CREATE operation. Adds a new person
+     * 
+     * @param person
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "/persons", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPerson(@Valid @RequestBody Person person, HttpServletRequest request,
+            HttpServletResponse response) {
+        personRepository.addPerson(person);
+        logger.info("Person added: " + person.getId());
+        response.setHeader("Location", request.getRequestURL().append("/").append(person.getId())
+                .toString());
+    }
 }

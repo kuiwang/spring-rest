@@ -9,23 +9,22 @@ import javax.ws.rs.PathParam;
  */
 @Path("/warehouse")
 public class WarehouseResource {
-	
-	@GET
-	public String getWarehouseInfo() {
-		return "Warehouse location: Barcelona";
-	}
-	
-	@Path("/items/{itemId}")
-	public ItemResource getItem(@PathParam("itemId") Integer itemId) {
-		ItemResource itemResource = null;
 
-		if (itemId > 10) {
-			itemResource = new TypeAResource(itemId);
-		}
-		else {
-			itemResource = new TypeBResource(itemId);
-		}
-		
-		return itemResource;
-	}
+    @GET
+    public String getWarehouseInfo() {
+        return "Warehouse location: Barcelona";
+    }
+
+    @Path("/items/{itemId}")
+    public ItemResource getItem(@PathParam("itemId") Integer itemId) {
+        ItemResource itemResource = null;
+
+        if (itemId > 10) {
+            itemResource = new TypeAResource(itemId);
+        } else {
+            itemResource = new TypeBResource(itemId);
+        }
+
+        return itemResource;
+    }
 }

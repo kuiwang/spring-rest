@@ -21,55 +21,54 @@ import xpadro.spring.rest.model.Car;
 import xpadro.spring.rest.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={
-	"classpath:xpadro/spring/rest/configuration/root-context.xml",
-	"classpath:xpadro/spring/rest/configuration/app-context.xml"})
+@ContextConfiguration(locations = { "classpath:xpadro/spring/rest/configuration/root-context.xml",
+        "classpath:xpadro/spring/rest/configuration/app-context.xml" })
 public class RestTesting {
-	private RestTemplate restTemplate = new RestTemplate();
 
-	@Before
-	public void setup() {
-		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
-		converters.add(new StringHttpMessageConverter());
-		converters.add(new Jaxb2RootElementHttpMessageConverter());
-		converters.add(new MappingJacksonHttpMessageConverter());
-		restTemplate.setMessageConverters(converters);
-	}
+    private RestTemplate restTemplate = new RestTemplate();
 
-	/**
-	 * Tests accessing to an existing user
-	 * This test should use the MappingJacksonHttpMessageConverter
-	 */
-	@Test
-	public void getUser() {
-		String uri = "http://localhost:8081/rest-converters/spring/users/{userId}";
-		User user = restTemplate.getForObject(uri, User.class, 1l);
-		assertNotNull(user);
-		assertEquals("Xavi", user.getName());
-	}
-	
-	
-	/**
-	 * Tests accessing to an existing user
-	 * This test should use the StringHttpMessageConverter
-	 */
-	@Test
-	public void getUserName() {
-		String uri = "http://localhost:8081/rest-converters/spring/usernames/{userId}";
-		String username = restTemplate.getForObject(uri, String.class, 1l);
-		assertNotNull(username);
-		assertEquals("Xavi Padro", username);
-	}
-	
-	/**
-	 * Tests accessing to an existing car
-	 * This test should use the Jaxb2RootElementHttpMessageConverter
-	 */
-	@Test
-	public void getCar() {
-		String uri = "http://localhost:8081/rest-converters/spring/cars/{carId}";
-		Car car = restTemplate.getForObject(uri, Car.class, 1l);
-		assertNotNull(car);
-		assertEquals("Ferrari", car.getBrand());
-	}
+    @Before
+    public void setup() {
+        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+        converters.add(new StringHttpMessageConverter());
+        converters.add(new Jaxb2RootElementHttpMessageConverter());
+        converters.add(new MappingJacksonHttpMessageConverter());
+        restTemplate.setMessageConverters(converters);
+    }
+
+    /**
+     * Tests accessing to an existing user This test should use the
+     * MappingJacksonHttpMessageConverter
+     */
+    @Test
+    public void getUser() {
+        String uri = "http://localhost:8081/rest-converters/spring/users/{userId}";
+        User user = restTemplate.getForObject(uri, User.class, 1l);
+        assertNotNull(user);
+        assertEquals("Xavi", user.getName());
+    }
+
+    /**
+     * Tests accessing to an existing user This test should use the
+     * StringHttpMessageConverter
+     */
+    @Test
+    public void getUserName() {
+        String uri = "http://localhost:8081/rest-converters/spring/usernames/{userId}";
+        String username = restTemplate.getForObject(uri, String.class, 1l);
+        assertNotNull(username);
+        assertEquals("Xavi Padro", username);
+    }
+
+    /**
+     * Tests accessing to an existing car This test should use the
+     * Jaxb2RootElementHttpMessageConverter
+     */
+    @Test
+    public void getCar() {
+        String uri = "http://localhost:8081/rest-converters/spring/cars/{carId}";
+        Car car = restTemplate.getForObject(uri, Car.class, 1l);
+        assertNotNull(car);
+        assertEquals("Ferrari", car.getBrand());
+    }
 }

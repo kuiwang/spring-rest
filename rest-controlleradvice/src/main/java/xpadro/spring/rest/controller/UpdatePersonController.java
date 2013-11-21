@@ -18,27 +18,30 @@ import xpadro.spring.rest.repository.PersonRepository;
 
 /**
  * Modifies an existing person
- * @author xpadro
- *
+ * 
  */
 @Controller
 public class UpdatePersonController {
-private static Logger logger = Logger.getLogger("main");
-	
-	@Autowired
-	private PersonRepository personRepository;
 
-	/**
-	 * UPDATE operation. Modifies an existing person
-	 * @param person
-	 * @param request
-	 * @param response
-	 */
-	@RequestMapping(value="/persons", method=RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void updatePerson(@Valid @RequestBody Person person, HttpServletRequest request, HttpServletResponse response) {
-		personRepository.updatePerson(person);
-		logger.info("Person updated: "+person.getId());
-		response.setHeader("Location", request.getRequestURL().append("/").append(person.getId()).toString());
-	}
+    private static Logger logger = Logger.getLogger("main");
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    /**
+     * UPDATE operation. Modifies an existing person
+     * 
+     * @param person
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "/persons", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updatePerson(@Valid @RequestBody Person person, HttpServletRequest request,
+            HttpServletResponse response) {
+        personRepository.updatePerson(person);
+        logger.info("Person updated: " + person.getId());
+        response.setHeader("Location", request.getRequestURL().append("/").append(person.getId())
+                .toString());
+    }
 }
